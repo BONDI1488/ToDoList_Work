@@ -1,9 +1,8 @@
-import './App.css';
 
 function App() {
   return (
     <div className="App">
-        <p></p>
+        <p className='text-5xl'>ajkhkahksdhfkjashdjkf</p>
     </div>
   );
 }
