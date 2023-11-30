@@ -1,4 +1,5 @@
 import React from 'react';
+import {ReactComponent as User} from "../../images/account_avatar_face_man_people_profile_user_icon_123197.svg";
 import classes from "./Header.module.scss";
 
 const Header = () => {
@@ -11,9 +12,11 @@ const Header = () => {
                 </div>
                 <div className='flex items-center '>
                     <button>
-                    <img src="/images/account_avatar_face_man_people_profile_user_icon_123197.svg"
-                         className='w-20 h-20 text-bronzeDark fill-current'
-                         alt="user"/>
+                        <User
+                            width="80"
+                            height="80"
+                            className={classes.user}
+                        />
                     </button>
                 </div>
             </div>

@@ -2,8 +2,8 @@ import React from 'react';
 
 const Title = () => {
     return (
-        <div className='py-40'>
-            <p className='text-center text-7xl'>Just do it.</p>
+        <div className='pt-20 flex justify-center items-center'>
+            <p className='text-center text-bronzeDark text-9xl font-custom'>Just do it.</p>
         </div>
     );
 };
