@@ -10,6 +10,7 @@ function App() {
             <Header/>
             <Title/>
             <Input/>
+            <Input/>
             <Tasks />
         </div>
     );
