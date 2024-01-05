@@ -3,6 +3,7 @@ import Header from "./components/Header/Header";
 import Title from "./components/Title/Title";
 import Input from "./components/Input/Input";
 import Tasks from "./components/Tasks/Tasks";
+import SIgnIn from "./components/SignIn/SIgnIn";
 
 function App() {
     const [savedText, setSavedText] = useState([]);
@@ -29,7 +30,6 @@ function App() {
     const handleHighlight = (index) => {
         const updatedText = [...savedText];
         updatedText[index].highlighted = !updatedText[index].highlighted;
-        updatedText[index].deleted = false; // Додайте цей рядок, щоб забезпечити скидання закреслення
         setSavedText(updatedText);
         localStorage.setItem('savedText', JSON.stringify(updatedText));
     };
@@ -45,6 +45,7 @@ function App() {
                    onDelete={handleDelete}
                    onHighlight={handleHighlight}
             />
+            <SIgnIn/>
         </div>
     );
 }
