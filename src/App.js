@@ -3,7 +3,8 @@ import Header from "./components/Header/Header";
 import Title from "./components/Title/Title";
 import Input from "./components/Input/Input";
 import Tasks from "./components/Tasks/Tasks";
-import SIgnIn from "./components/SignIn/SIgnIn";
+import SignUp from "./components/SignUp/SignUp";
+import SignIn from "./components/SignIn/SignIn";
 
 function App() {
     const [savedText, setSavedText] = useState([]);
@@ -45,7 +46,8 @@ function App() {
                    onDelete={handleDelete}
                    onHighlight={handleHighlight}
             />
-            <SIgnIn/>
+            <SignIn/>
+            <SignUp/>
         </div>
     );
 }
