@@ -14,6 +14,17 @@ const SignUp = () => {
         })
     }, []);
 
+    const handleFormSubmit = (values, { setSubmitting,resetForm }) => {
+        // Зберігаємо дані в localStorage
+        localStorage.setItem('user', JSON.stringify(values));
+        setTimeout(() => {
+            console.log(JSON.stringify(values, null, 2));
+            setSubmitting(false);
+        }, 400);
+        resetForm();
+    };
+
+
     return (
         <div>
             <Formik
@@ -34,12 +45,7 @@ const SignUp = () => {
                     }
                     return errors;
                 }}
-                onSubmit={(values, {setSubmitting}) => {
-                    setTimeout(() => {
-                        alert(JSON.stringify(values, null, 2));
-                        setSubmitting(false);
-                    }, 400);
-                }}
+                onSubmit={handleFormSubmit}
             >
                 {({
                       values,
@@ -49,6 +55,7 @@ const SignUp = () => {
                       handleBlur,
                       handleSubmit,
                       isSubmitting,
+                      resetForm,
                   }) => (
                     <form
                         ref={formSignUpRef}

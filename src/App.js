@@ -46,8 +46,8 @@ function App() {
                    onDelete={handleDelete}
                    onHighlight={handleHighlight}
             />
-            <SignIn/>
-            <SignUp/>
+            {/*<SignIn/>*/}
+            {/*<SignUp/>*/}
         </div>
     );
 }

@@ -16,6 +16,23 @@ const SignIn = () => {
         })
     }, []);
 
+    const handleFormSubmit = (values, { setSubmitting, resetForm }) => {
+        const storedUserData = localStorage.getItem('user');
+
+        if (storedUserData) {
+            const parsedUserData = JSON.parse(storedUserData);
+            if (values.email === parsedUserData.email && values.password === parsedUserData.password) {
+                console.log('Авторизація успішна');
+            } else {
+                console.log('Невірна електронна пошта або пароль');
+            }
+        } else {
+            console.log('Користувача з такою електронною поштою не знайдено');
+        }
+        setSubmitting(false);
+        resetForm();
+    };
+
     return (
         <div>
             <Formik
@@ -34,12 +51,8 @@ const SignIn = () => {
                     }
                     return errors;
                 }}
-                onSubmit={(values, {setSubmitting}) => {
-                    setTimeout(() => {
-                        alert(JSON.stringify(values, null, 2));
-                        setSubmitting(false);
-                    }, 400);
-                }}
+                onSubmit={handleFormSubmit}
+
             >
                 {({
                       values,
@@ -49,6 +62,7 @@ const SignIn = () => {
                       handleBlur,
                       handleSubmit,
                       isSubmitting,
+                      resetForm,
                   }) => (
 
                     <form
