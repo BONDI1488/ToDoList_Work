@@ -7,8 +7,12 @@ const Header = () => {
         <header className='max-w-full h-72px py-[36px]'>
             <div className='max-w-screen-xl	mx-auto flex justify-between'>
                 <div className='flex items-center'>
-                    <div className="mr-5 w-10 h-10 bg-gradient-to-r from-gradientDark1 from-5% via-gradientDark2 via-35% to-gradientDark3 to-95% rounded-full border-bronzeDark border border-solid"></div>
-                    <div className=" w-10 h-10 bg-gradient-to-r from-gradientDark1 from-5% via-gradientDark2 via-35% to-gradientDark3 to-95% rounded-full border-bronzeDark border border-solid"></div>
+                    <button>
+                        <div className="mr-5 w-10 h-10 bg-gradient-to-r from-gradientDark1 from-5% via-gradientDark2 via-35% to-gradientDark3 to-95% rounded-full border-bronzeDark border border-solid"></div>
+                    </button>
+                    <button>
+                        <div className=" w-10 h-10 bg-gradient-to-r from-gradientDark1 from-5% via-gradientDark2 via-35% to-gradientDark3 to-95% rounded-full border-bronzeDark border border-solid"></div>
+                    </button>
                 </div>
                 <div className='flex items-center '>
                     <button>
