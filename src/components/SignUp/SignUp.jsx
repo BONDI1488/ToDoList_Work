@@ -1,21 +1,22 @@
 import React, {useEffect, useRef} from 'react';
 import anime from "animejs";
 import {Formik} from "formik";
+import CloseBtn from "../../images/icons8-close-50.png";
 
-const SignUp = () => {
+
+const SignUp = ({toggleForm}) => {
     const formSignUpRef = useRef(null)
 
     useEffect(() => {
         anime({
             targets: formSignUpRef.current,
-            // rotate: '1turn', // 1turn еквівалентно 360 градусам
-            // easing: 'easeInOutQuad',
-            // duration: 1000,
+            // translateX: 250,
+            // duration: 1500,
+
         })
     }, []);
 
     const handleFormSubmit = (values, { setSubmitting,resetForm }) => {
-        // Зберігаємо дані в localStorage
         localStorage.setItem('user', JSON.stringify(values));
         setTimeout(() => {
             console.log(JSON.stringify(values, null, 2));
@@ -110,7 +111,7 @@ const SignUp = () => {
                                 placeholder='password'
                             />
                         </div>
-                        <p>{errors.password && touched.password && errors.password}</p>
+                        {/*<p>{errors.password && touched.password && errors.password}</p>*/}
                         <div className='flex justify-center pt-[32px]'>
                             <button
                                 type="submit"
@@ -120,11 +121,13 @@ const SignUp = () => {
                                 Sign up
                             </button>
                         </div>
+                        Вже маєте акаунт?{' '}
+                        <span onClick={toggleForm}>Увійти зараз</span>
+
                     </form>
                 )}
             </Formik>
         </div>
     );
-};
-
+}
 export default SignUp;
