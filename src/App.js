@@ -3,10 +3,15 @@ import Header from "./components/Header/Header";
 import Title from "./components/Title/Title";
 import Input from "./components/Input/Input";
 import Tasks from "./components/Tasks/Tasks";
+import rootReducer from "./reducer";
 import SignUp from "./components/SignUp/SignUp";
 import SignIn from "./components/SignIn/SignIn";
+import {createStore} from "redux";
+import {Provider} from "react-redux";
+import Modal from "./components/formRedux/Modal";
 
-function App() {
+function App({openSignUpModal}) {
+    const store = createStore(rootReducer)
     const [savedText, setSavedText] = useState([]);
 
     useEffect(() => {
@@ -17,7 +22,7 @@ function App() {
     }, []);
 
     const handleSave = (text) => {
-        const updatedText = [...savedText, { text, highlighted: false }];
+        const updatedText = [...savedText, {text, highlighted: false}];
         setSavedText(updatedText);
         localStorage.setItem('savedText', JSON.stringify(updatedText));
     };
@@ -38,18 +43,20 @@ function App() {
     console.log(savedText);
 
     return (
-        <div className="min-h-screen bg-gradient-to-r from-gradientDark1 from-5% via-gradientDark2 via-35% to-gradientDark3 to-95%">
-            <Header/>
-            <Title/>
-            <Input onSave={handleSave}/>
-            <Tasks savedText={savedText}
-                   onDelete={handleDelete}
-                   onHighlight={handleHighlight}
-            />
-            <SignIn/>
-            <SignUp/>
-        </div>
+        <Provider store={store}>
+            <div
+                className="min-h-screen bg-gradient-to-r from-gradientDark1 from-5% via-gradientDark2 via-35% to-gradientDark3 to-95%">
+                <Header/>
+                <Title/>
+                <Input onSave={handleSave}/>
+                <Tasks savedText={savedText}
+                       onDelete={handleDelete}
+                       onHighlight={handleHighlight}
+                />
+            </div>
+        </Provider>
     );
 }
+
 
 export default App;
