@@ -1,18 +1,18 @@
 import React, {useEffect, useRef} from 'react';
 import anime from "animejs";
-import { connect } from "react-redux";
 import {Formik} from "formik";
+// import CloseBtn from '../../../public/icons8-close-50.png'
 
-const SignIn = ({ toggleForm, loginUser }) => {
+const SignIn = () => {
 
     const formSignInRef = useRef(null)
 
     useEffect(() => {
         anime({
             targets: formSignInRef.current,
-            // rotate: '1turn', // 1turn еквівалентно 360 градусам
-            // easing: 'easeInOutQuad',
-            // duration: 1000,
+            duration: 300,
+            scale: [0.8, 1],
+            easing: 'easeInOutQuad',
         })
     }, []);
 
@@ -34,7 +34,7 @@ const SignIn = ({ toggleForm, loginUser }) => {
     };
 
     return (
-        <div>
+        <div className="flex items-center justify-center w-screen h-screen">
             <Formik
                 initialValues={{
                     email: '',
@@ -64,48 +64,46 @@ const SignIn = ({ toggleForm, loginUser }) => {
                       isSubmitting,
                       resetForm,
                   }) => (
-
                     <form
                         onSubmit={handleSubmit}
                         ref={formSignInRef}
-                        className='absolute z-10 font-custom rounded-2xl h-[358px] w-[400px]  bg-gradient-to-r from-gradientDark1 from-5% via-gradientDark2 via-35% to-gradientDark3 to-95%'>
-                        <p className='text-center  text-bronzeDark pt-5 text-6xl font-thin'>
-                            Sign in
-                        </p>
-                        <div className='flex justify-center pt-[32px]'>
-                            <input
-                                   type="email"
-                                   name="email"
-                                   onChange={handleChange}
-                                   onBlur={handleBlur}
-                                   value={values.email}
-                                   className='px-3 rounded-lg  placeholder:text-inputTextPlaceholderDark outline-none bg-darkDark text-inputTextDark w-[350px] h-[45px] text-xl'
-                                   placeholder='email'
-                            />
-                        </div>
-                        {/*<p className=' left-3 text-red-400'>{errors.email && touched.email && errors.email}</p>*/}
-                        <div className='flex justify-center pt-[32px]'>
-                            <input
-                                   type="password"
-                                   name="password"
-                                   onChange={handleChange}
-                                   onBlur={handleBlur}
-                                   value={values.password}
-                                   className='px-3 rounded-lg  placeholder:text-inputTextPlaceholderDark outline-none bg-darkDark text-inputTextDark w-[350px] h-[45px] text-xl'
-                                   placeholder='password'
-                            />
-                        </div>
-                        <p>{errors.password && touched.password && errors.password}</p>
-                        <div className='flex justify-center pt-[32px]'>
-                            <button
-                                type="submit"
-                                disabled={isSubmitting}
-                                className='w-[350px] h-[45px] rounded-lg text-black bg-bronzeDark text-2xl'
-                            >
-                                Sign in
-                            </button>
-                        </div>
-
+                        className='z-10 font-custom rounded-2xl h-[358px] w-[400px]  bg-gradient-to-r from-gradientDark1 from-5% via-gradientDark2 via-35% to-gradientDark3 to-95%'>
+                         <p className='text-center  text-bronzeDark pt-5 text-6xl font-thin'>
+                             Sign in
+                         </p>
+                         <div className='flex justify-center pt-[32px]'>
+                             <input
+                                    type="email"
+                                    name="email"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.email}
+                                    className='px-3 rounded-lg  placeholder:text-inputTextPlaceholderDark outline-none bg-darkDark text-inputTextDark w-[350px] h-[45px] text-xl'
+                                    placeholder='email'
+                             />
+                         </div>
+                         <p className=' left-3 text-red-400'>{errors.email && touched.email && errors.email}</p>
+                         <div className='flex justify-center pt-[32px]'>
+                             <input
+                                    type="password"
+                                    name="password"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.password}
+                                    className='px-3 rounded-lg  placeholder:text-inputTextPlaceholderDark outline-none bg-darkDark text-inputTextDark w-[350px] h-[45px] text-xl'
+                                    placeholder='password'
+                             />
+                         </div>
+                         <p>{errors.password && touched.password && errors.password}</p>
+                         <div className='flex justify-center pt-[32px]'>
+                             <button
+                                 type="submit"
+                                 disabled={isSubmitting}
+                                 className='w-[350px] h-[45px] rounded-lg text-black bg-bronzeDark text-2xl'
+                             >
+                                 Sign in
+                             </button>
+                         </div>
                     </form>
                 )}
 
@@ -113,5 +111,4 @@ const SignIn = ({ toggleForm, loginUser }) => {
         </div>
     );
 };
-
 export default SignIn;

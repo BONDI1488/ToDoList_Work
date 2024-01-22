@@ -1,20 +1,22 @@
 import React, {useEffect, useRef} from 'react';
 import anime from "animejs";
 import {Formik} from "formik";
-import CloseBtn from "../../images/icons8-close-50.png";
+// import CloseBtn from "../../../public/icons8-close-50.png";
+import {connect} from "react-redux";
 
 
-const SignUp = ({toggleForm}) => {
+const SignUp = ({isModalOpen, toggleForm}) => {
     const formSignUpRef = useRef(null)
 
     useEffect(() => {
         anime({
             targets: formSignUpRef.current,
-            // translateX: 250,
-            // duration: 1500,
-
+            duration: 300,
+            // opacity: [0, 1],
+            scale: [0.8, 1],
+            easing: 'easeInOutQuad',
         })
-    }, []);
+    }, [isModalOpen]);
 
     const handleFormSubmit = (values, { setSubmitting,resetForm }) => {
         localStorage.setItem('user', JSON.stringify(values));
@@ -27,7 +29,7 @@ const SignUp = ({toggleForm}) => {
 
 
     return (
-        <div>
+        <div className="flex items-center justify-center w-screen h-screen">
             <Formik
                 initialValues={{
                     name: '',
@@ -61,7 +63,7 @@ const SignUp = ({toggleForm}) => {
                     <form
                         ref={formSignUpRef}
                         onSubmit={handleSubmit}
-                        className='font-custom m-auto rounded-2xl h-[505px] w-[400px] mt-6 bg-gradient-to-r from-gradientDark1 from-5% via-gradientDark2 via-35% to-gradientDark3 to-95%'
+                        className='font-custom rounded-2xl h-[505px] w-[400px]  bg-gradient-to-r from-gradientDark1 from-5% via-gradientDark2 via-35% to-gradientDark3 to-95%'
                     >
                         <p className='text-center  text-bronzeDark pt-5 text-6xl font-thin'>
                             Sign up
@@ -121,13 +123,15 @@ const SignUp = ({toggleForm}) => {
                                 Sign up
                             </button>
                         </div>
-                        Вже маєте акаунт?{' '}
-                        <span onClick={toggleForm}>Увійти зараз</span>
-
+                        <p className='text-center pt-2'>
+                            Вже маєте акаунт?
+                            <span className=' cursor-pointer' onClick={toggleForm}>Увійти зараз</span>
+                        </p>
                     </form>
                 )}
             </Formik>
-        </div>
+            </div>
     );
 }
+
 export default SignUp;
