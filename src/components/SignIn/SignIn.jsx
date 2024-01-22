@@ -1,22 +1,32 @@
 import React, {useEffect, useRef} from 'react';
 import anime from "animejs";
 import {Formik} from "formik";
-// import CloseBtn from '../../../public/icons8-close-50.png'
+import {connect} from 'react-redux'
 
-const SignIn = () => {
+const SignIn = ({toggleModal, isModalOpen}) => {
 
     const formSignInRef = useRef(null)
 
-    useEffect(() => {
-        anime({
-            targets: formSignInRef.current,
-            duration: 300,
-            scale: [0.8, 1],
-            easing: 'easeInOutQuad',
-        })
-    }, []);
+    const handleClose = () => {
+        toggleModal();
+    };
 
-    const handleFormSubmit = (values, { setSubmitting, resetForm }) => {
+    useEffect(() => {
+        if (isModalOpen) {
+            anime({
+                targets: formSignInRef.current,
+                duration: 300,
+                scale: [0.8, 1],
+                easing: 'easeInOutQuad',
+            })
+        }
+    }, [isModalOpen]);
+
+    if (!isModalOpen) {
+        return null;
+    }
+
+    const handleFormSubmit = (values, {setSubmitting, resetForm}) => {
         const storedUserData = localStorage.getItem('user');
 
         if (storedUserData) {
@@ -34,7 +44,7 @@ const SignIn = () => {
     };
 
     return (
-        <div className="flex items-center justify-center w-screen h-screen">
+        <div className="flex justify-center items-center h-screen w-screen">
             <Formik
                 initialValues={{
                     email: '',
@@ -68,42 +78,48 @@ const SignIn = () => {
                         onSubmit={handleSubmit}
                         ref={formSignInRef}
                         className='z-10 font-custom rounded-2xl h-[358px] w-[400px]  bg-gradient-to-r from-gradientDark1 from-5% via-gradientDark2 via-35% to-gradientDark3 to-95%'>
-                         <p className='text-center  text-bronzeDark pt-5 text-6xl font-thin'>
-                             Sign in
-                         </p>
-                         <div className='flex justify-center pt-[32px]'>
-                             <input
-                                    type="email"
-                                    name="email"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.email}
-                                    className='px-3 rounded-lg  placeholder:text-inputTextPlaceholderDark outline-none bg-darkDark text-inputTextDark w-[350px] h-[45px] text-xl'
-                                    placeholder='email'
-                             />
-                         </div>
-                         <p className=' left-3 text-red-400'>{errors.email && touched.email && errors.email}</p>
-                         <div className='flex justify-center pt-[32px]'>
-                             <input
-                                    type="password"
-                                    name="password"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.password}
-                                    className='px-3 rounded-lg  placeholder:text-inputTextPlaceholderDark outline-none bg-darkDark text-inputTextDark w-[350px] h-[45px] text-xl'
-                                    placeholder='password'
-                             />
-                         </div>
-                         <p>{errors.password && touched.password && errors.password}</p>
-                         <div className='flex justify-center pt-[32px]'>
-                             <button
-                                 type="submit"
-                                 disabled={isSubmitting}
-                                 className='w-[350px] h-[45px] rounded-lg text-black bg-bronzeDark text-2xl'
-                             >
-                                 Sign in
-                             </button>
-                         </div>
+                        <button
+                            onClick={handleClose}
+                            className='absolute top-0 right-0 m-4 cursor-pointer'
+                        >
+                            <img src='/icons8-close-50.png' width={30} height={30} alt="Close" />
+                        </button>
+                        <p className='text-center  text-bronzeDark pt-5 text-6xl font-thin'>
+                            Sign in
+                        </p>
+                        <div className='flex justify-center pt-[32px]'>
+                            <input
+                                type="email"
+                                name="email"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.email}
+                                className='px-3 rounded-lg  placeholder:text-inputTextPlaceholderDark outline-none bg-darkDark text-inputTextDark w-[350px] h-[45px] text-xl'
+                                placeholder='email'
+                            />
+                        </div>
+                        <p className=' left-3 text-red-400'>{errors.email && touched.email && errors.email}</p>
+                        <div className='flex justify-center pt-[32px]'>
+                            <input
+                                type="password"
+                                name="password"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.password}
+                                className='px-3 rounded-lg  placeholder:text-inputTextPlaceholderDark outline-none bg-darkDark text-inputTextDark w-[350px] h-[45px] text-xl'
+                                placeholder='password'
+                            />
+                        </div>
+                        <p>{errors.password && touched.password && errors.password}</p>
+                        <div className='flex justify-center pt-[32px]'>
+                            <button
+                                type="submit"
+                                disabled={isSubmitting}
+                                className='w-[350px] h-[45px] rounded-lg text-black bg-bronzeDark text-2xl'
+                            >
+                                Sign in
+                            </button>
+                        </div>
                     </form>
                 )}
 
@@ -111,4 +127,15 @@ const SignIn = () => {
         </div>
     );
 };
-export default SignIn;
+
+const mapStateToProps = (state) => ({
+    isModalOpen: state.isModalOpen,
+    isLoginForm: state.isLoginForm,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    toggleModal: () => dispatch({type: 'TOGGLE_MODAL'}),
+    toggleForm: () => dispatch({type: 'TOGGLE_FORM'}),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
