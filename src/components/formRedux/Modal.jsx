@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import RegistrationForm from '../SignUp/SignUp';
 import LoginForm from '../SignIn/SignIn';
 import classes from "./Modal.module.scss";
+
 const Modal = ({isModalOpen, isLoginForm, toggleModal, toggleForm}) => {
     const handleClose = () => {
         toggleModal();
@@ -14,14 +15,12 @@ const Modal = ({isModalOpen, isLoginForm, toggleModal, toggleForm}) => {
 
     return (
         <div>
-            <div className={classes.modal}>
-                <div className={classes.overlay}>
-                    {isLoginForm ? (
-                        <LoginForm/>
-                    ) : (
-                        <RegistrationForm toggleForm={toggleForm}/>
-                    )}
-                </div>
+            <div className={classes.overlay}>
+                {isLoginForm ? (
+                    <RegistrationForm/>
+                ) : (
+                    <LoginForm toggleForm={toggleForm}/>
+                )}
             </div>
         </div>
     );

@@ -138,10 +138,7 @@ const SignUp = ({isModalOpen, isLoginForm, toggleModal, toggleForm}) => {
                                 Sign up
                             </button>
                         </div>
-                        <p className='text-center pt-2'>
-                            Вже маєте акаунт?
-                            <span className=' cursor-pointer' onClick={toggleForm}>Увійти зараз</span>
-                        </p>
+
                     </form>
                 )}
             </Formik>

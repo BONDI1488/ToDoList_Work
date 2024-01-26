@@ -3,7 +3,7 @@ import anime from "animejs";
 import {Formik} from "formik";
 import {connect} from 'react-redux'
 
-const SignIn = ({toggleModal, isModalOpen}) => {
+const SignIn = ({toggleModal, isModalOpen, toggleForm}) => {
 
     const formSignInRef = useRef(null)
 
@@ -120,9 +120,12 @@ const SignIn = ({toggleModal, isModalOpen}) => {
                                 Sign in
                             </button>
                         </div>
+                        <p className='text-center text-black pt-2 text-lg '>
+                            Don't have an account yet?
+                            <span className='cursor-pointer' onClick={toggleForm}> Sign Up </span>
+                        </p>
                     </form>
                 )}
-
             </Formik>
         </div>
     );
